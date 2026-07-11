@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Megha Gupta — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --lavender:#B9A6E8;
+    --lavender-deep:#7C5CBF;
+    --lavender-dark:#4B3585;
+    --lavender-soft:#EFE9FB;
+    --lavender-mist:#F8F5FE;
+    --white:#FFFFFF;
+    --ink:#2B2440;
+    --muted:#6E6590;
+    --mint:#5ECCB3;
+    --coral:#FF8E7A;
+    --sun:#FFC85C;
+    --sky:#6EB6FF;
+    --radius:22px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-family:'Sora',sans-serif}
+
+  /* ---------- floating blobs ---------- */
+  .blob{position:fixed;border-radius:50%;filter:blur(90px);opacity:.45;z-index:-1;animation:drift 18s ease-in-out infinite alternate}
+  .blob.b1{width:480px;height:480px;background:var(--lavender);top:-120px;left:-120px}
+  .blob.b2{width:380px;height:380px;background:#D8CCF4;bottom:-100px;right:-80px;animation-delay:-6s}
+  .blob.b3{width:260px;height:260px;background:#C9F2E7;top:50%;left:70%;animation-delay:-12s;opacity:.35}
+  @keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(60px,40px) scale(1.15)}}
+
+  /* ---------- nav ---------- */
+  nav{
+    position:fixed;top:16px;left:50%;transform:translateX(-50%);
+    background:rgba(255,255,255,.8);backdrop-filter:blur(14px);
+    border:1px solid var(--lavender-soft);
+    border-radius:999px;padding:10px 12px;z-index:100;
+    box-shadow:0 8px 30px rgba(124,92,191,.12);
+    display:flex;gap:4px;max-width:94vw;overflow-x:auto;
+  }
+  nav a{
+    text-decoration:none;color:var(--muted);font-size:.85rem;font-weight:600;
+    padding:8px 16px;border-radius:999px;white-space:nowrap;transition:all .25s;
+  }
+  nav a:hover,nav a.active{background:var(--lavender-deep);color:#fff}
+
+  section{max-width:1060px;margin:0 auto;padding:90px 24px}
+
+  /* ---------- hero ---------- */
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:120px;position:relative}
+  .hello-chip{
+    display:inline-flex;align-items:center;gap:8px;align-self:flex-start;
+    background:var(--lavender-soft);color:var(--lavender-dark);
+    padding:8px 18px;border-radius:999px;font-weight:600;font-size:.9rem;
+    animation:pop .6s ease both;
+  }
+  .hello-chip .wave{display:inline-block;animation:wave 2.2s ease-in-out infinite;transform-origin:70% 70%}
+  @keyframes wave{0%,60%,100%{transform:rotate(0)}10%,30%{transform:rotate(16deg)}20%,40%{transform:rotate(-8deg)}}
+  .hero h1{
+    font-size:clamp(2.6rem,7vw,4.6rem);font-weight:800;line-height:1.08;margin:22px 0 10px;
+    animation:rise .7s .1s ease both;
+  }
+  .hero h1 .grad{
+    background:linear-gradient(92deg,var(--lavender-deep),#A47CF0 50%,var(--sky));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .typing-line{font-size:clamp(1.15rem,3vw,1.6rem);font-weight:600;color:var(--muted);min-height:2.2em;animation:rise .7s .2s ease both}
+  .typing-line .typed{color:var(--lavender-deep)}
+  .cursor{display:inline-block;width:3px;height:1.15em;background:var(--lavender-deep);vertical-align:text-bottom;margin-left:2px;animation:blink .8s step-end infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero p.lead{max-width:620px;margin-top:18px;color:var(--muted);font-size:1.05rem;line-height:1.7;animation:rise .7s .3s ease both}
+  .hero-cta{display:flex;gap:14px;margin-top:32px;flex-wrap:wrap;animation:rise .7s .4s ease both}
+  .btn{
+    text-decoration:none;font-weight:600;padding:14px 28px;border-radius:999px;transition:all .25s;font-size:.95rem;
+  }
+  .btn.primary{background:var(--lavender-deep);color:#fff;box-shadow:0 10px 24px rgba(124,92,191,.35)}
+  .btn.primary:hover{transform:translateY(-3px);box-shadow:0 16px 30px rgba(124,92,191,.45)}
+  .btn.ghost{border:2px solid var(--lavender);color:var(--lavender-dark)}
+  .btn.ghost:hover{background:var(--lavender-soft);transform:translateY(-3px)}
+  .scroll-hint{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:var(--muted);font-size:.8rem;animation:bob 1.8s ease-in-out infinite}
+  @keyframes bob{0%,100%{transform:translate(-50%,0)}50%{transform:translate(-50%,8px)}}
+  @keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+  @keyframes pop{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1)}}
+
+  /* ---------- section titles ---------- */
+  .sec-tag{color:var(--lavender-deep);font-weight:700;font-size:.85rem;letter-spacing:.14em;text-transform:uppercase}
+  .sec-title{font-size:clamp(1.8rem,4.5vw,2.6rem);font-weight:800;margin:8px 0 40px}
+
+  /* ---------- reveal on scroll ---------- */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.show{opacity:1;transform:none}
+
+  /* ---------- stats ---------- */
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;margin-top:-20px}
+  .stat{
+    background:var(--lavender-mist);border:1px solid var(--lavender-soft);
+    border-radius:var(--radius);padding:26px 20px;text-align:center;transition:transform .3s;
+  }
+  .stat:hover{transform:translateY(-6px)}
+  .stat .num{font-family:'Sora';font-size:2rem;font-weight:800;color:var(--lavender-deep)}
+  .stat .lbl{color:var(--muted);font-size:.85rem;margin-top:6px}
+
+  /* ---------- timeline ---------- */
+  .timeline{position:relative;margin-top:10px}
+  .timeline::before{
+    content:'';position:absolute;left:18px;top:0;bottom:0;width:3px;
+    background:linear-gradient(var(--lavender),var(--lavender-soft));border-radius:3px;
+  }
+  .titem{position:relative;padding:0 0 42px 62px}
+  .titem .dot{
+    position:absolute;left:6px;top:4px;width:27px;height:27px;border-radius:50%;
+    background:#fff;border:3px solid var(--lavender-deep);
+    display:flex;align-items:center;justify-content:center;font-size:.75rem;
+    transition:transform .3s;z-index:1;
+  }
+  .titem:hover .dot{transform:scale(1.25);background:var(--lavender-soft)}
+  .tcard{
+    background:#fff;border:1px solid var(--lavender-soft);border-radius:var(--radius);
+    padding:24px 26px;box-shadow:0 4px 20px rgba(124,92,191,.07);
+    transition:transform .3s,box-shadow .3s;cursor:pointer;
+  }
+  .tcard:hover{transform:translateX(6px);box-shadow:0 12px 32px rgba(124,92,191,.16)}
+  .tcard .when{font-size:.78rem;font-weight:700;color:var(--lavender-deep);letter-spacing:.06em;text-transform:uppercase}
+  .tcard h3{margin:6px 0 2px;font-size:1.15rem}
+  .tcard .role{color:var(--muted);font-weight:600;font-size:.92rem}
+  .tcard .details{max-height:0;overflow:hidden;transition:max-height .45s ease;color:var(--muted);font-size:.92rem;line-height:1.65}
+  .tcard.open .details{max-height:300px;margin-top:12px}
+  .tcard .more{font-size:.78rem;color:var(--lavender);margin-top:10px;font-weight:600}
+  .tcard ul{padding-left:18px}
+  .tcard li{margin-bottom:6px}
+  .badge{display:inline-block;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:999px;margin-left:8px;vertical-align:middle}
+  .badge.now{background:#E2F8F1;color:#0E8F6F}
+  .badge.soon{background:#FFF1E4;color:#D96B2B;animation:pulse 1.8s ease-in-out infinite}
+  @keyframes pulse{50%{transform:scale(1.07)}}
+
+  /* ---------- highlights ---------- */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .hcard{
+    background:#fff;border:1px solid var(--lavender-soft);border-radius:var(--radius);
+    padding:28px;transition:transform .3s,box-shadow .3s;position:relative;overflow:hidden;
+  }
+  .hcard::before{
+    content:'';position:absolute;inset:0 0 auto 0;height:5px;
+    background:linear-gradient(90deg,var(--c1,var(--lavender)),var(--c2,var(--lavender-deep)));
+    transform:scaleX(0);transform-origin:left;transition:transform .4s;
+  }
+  .hcard:hover{transform:translateY(-8px);box-shadow:0 16px 36px rgba(124,92,191,.16)}
+  .hcard:hover::before{transform:scaleX(1)}
+  .hcard .ico{font-size:1.7rem}
+  .hcard h3{font-size:1.05rem;margin:12px 0 8px}
+  .hcard p{color:var(--muted);font-size:.9rem;line-height:1.65}
+
+  /* ---------- skills ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+  .sgroup{background:var(--lavender-mist);border:1px solid var(--lavender-soft);border-radius:var(--radius);padding:24px;transition:transform .3s}
+  .sgroup:hover{transform:translateY(-6px)}
+  .sgroup h3{font-size:.95rem;color:var(--lavender-dark);margin-bottom:14px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chip{
+    background:#fff;border:1px solid var(--lavender-soft);color:var(--ink);
+    padding:6px 14px;border-radius:999px;font-size:.82rem;font-weight:600;
+    transition:all .25s;cursor:default;
+  }
+  .chip:hover{background:var(--lavender-deep);color:#fff;transform:scale(1.08);border-color:var(--lavender-deep)}
+
+  .ach-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:34px}
+  .ach{
+    display:flex;gap:14px;align-items:flex-start;background:#fff;
+    border:1px solid var(--lavender-soft);border-radius:18px;padding:18px 20px;
+    transition:all .3s;font-size:.9rem;color:var(--muted);line-height:1.55;
+  }
+  .ach:hover{transform:translateY(-4px);box-shadow:0 10px 24px rgba(124,92,191,.14)}
+  .ach .a-ico{font-size:1.3rem;flex-shrink:0}
+  .ach b{color:var(--ink)}
+
+  .profiles{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px;justify-content:center}
+  .prof{
+    text-decoration:none;font-weight:600;font-size:.85rem;color:var(--lavender-dark);
+    background:var(--lavender-soft);padding:10px 20px;border-radius:999px;transition:all .25s;
+  }
+  .prof:hover{background:var(--lavender-deep);color:#fff;transform:translateY(-3px)}
+
+  /* ---------- pet venture ---------- */
+  .pet-banner{
+    background:linear-gradient(135deg,var(--lavender-dark),var(--lavender-deep) 55%,#9F7FE3);
+    border-radius:30px;padding:56px 40px;color:#fff;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .pet-banner h2{font-size:clamp(1.6rem,4vw,2.3rem);margin-bottom:14px}
+  .pet-banner p{max-width:560px;margin:0 auto;opacity:.92;line-height:1.7}
+  .pet-banner .paws{font-size:2rem;margin-bottom:10px;letter-spacing:.4em}
+  .pet-banner .paws span{display:inline-block;animation:step 1.6s ease-in-out infinite}
+  .pet-banner .paws span:nth-child(2){animation-delay:.2s}
+  .pet-banner .paws span:nth-child(3){animation-delay:.4s}
+  .pet-banner .paws span:nth-child(4){animation-delay:.6s}
+  @keyframes step{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .soon-pill{
+    display:inline-block;margin-top:24px;background:rgba(255,255,255,.16);
+    border:1px solid rgba(255,255,255,.4);padding:10px 26px;border-radius:999px;
+    font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem;
+  }
+
+  /* ---------- hobbies ---------- */
+  .hobbies{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px}
+  .hob{
+    background:var(--lavender-mist);border:1px solid var(--lavender-soft);
+    border-radius:var(--radius);padding:30px 20px;text-align:center;
+    transition:all .3s;cursor:default;
+  }
+  .hob:hover{transform:translateY(-8px) rotate(-1.5deg);background:#fff;box-shadow:0 14px 30px rgba(124,92,191,.15)}
+  .hob .emo{font-size:2.2rem;display:inline-block;transition:transform .4s}
+  .hob:hover .emo{transform:scale(1.3) rotate(8deg)}
+  .hob h3{font-size:1rem;margin-top:12px}
+  .hob p{font-size:.8rem;color:var(--muted);margin-top:6px;line-height:1.5}
+
+  /* ---------- contact ---------- */
+  .contact-wrap{text-align:center}
+  .contact-links{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:30px}
+  .clink{
+    display:flex;align-items:center;gap:10px;text-decoration:none;
+    background:#fff;border:1px solid var(--lavender-soft);color:var(--ink);
+    padding:14px 26px;border-radius:999px;font-weight:600;font-size:.92rem;
+    transition:all .25s;box-shadow:0 4px 16px rgba(124,92,191,.08);
+  }
+  .clink:hover{transform:translateY(-4px);border-color:var(--lavender);box-shadow:0 12px 26px rgba(124,92,191,.2)}
+
+  footer{text-align:center;padding:40px 20px 60px;color:var(--muted);font-size:.85rem}
+  footer .heart{color:var(--coral)}
+
+  /* paw click effect */
+  .paw-fx{position:fixed;pointer-events:none;font-size:1.3rem;z-index:999;animation:pawfade 1s ease-out forwards}
+  @keyframes pawfade{from{opacity:.9;transform:scale(.6) rotate(-15deg)}to{opacity:0;transform:scale(1.4) translateY(-34px) rotate(10deg)}}
+
+  @media (max-width:600px){
+    nav{gap:0;padding:8px}
+    nav a{padding:7px 11px;font-size:.78rem}
+    section{padding:64px 18px}
+  }
+</style>
+</head>
+<body>
+
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<nav>
+  <a href="#home" class="active">Home</a>
+  <a href="#journey">Journey</a>
+  <a href="#skills">Skills</a>
+  <a href="#highlights">Highlights</a>
+  <a href="#next">What's Next</a>
+  <a href="#beyond">Beyond Work</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <span class="hello-chip"><span class="wave">👋</span> Hi there, I'm</span>
+  <h1><span class="grad">Megha Gupta</span></h1>
+  <div class="typing-line">I'm a <span class="typed" id="typed"></span><span class="cursor"></span></div>
+  <p class="lead">
+    Computer Science engineer turned entrepreneur. I've built software at Goldman Sachs and Amazon,
+    run operations at my family's business, and now I'm building something of my own —
+    a venture for pets and the people who love them. 🐾
+  </p>
+  <div class="hero-cta">
+    <a href="#journey" class="btn primary">Explore my journey</a>
+    <a href="#contact" class="btn ghost">Say hello</a>
+  </div>
+  <div class="scroll-hint">scroll ↓</div>
+</section>
+
+<!-- STATS -->
+<section class="reveal" style="padding-top:0">
+  <div class="stats">
+    <div class="stat"><div class="num" data-count="9.2">0</div><div class="lbl">GPA / 10 · B.Tech CSE</div></div>
+    <div class="stat"><div class="num" data-count="7000" data-suffix="+">0</div><div class="lbl">Employees served by my portal</div></div>
+    <div class="stat"><div class="num" data-count="95" data-suffix="%">0</div><div class="lbl">Deployment downtime reduced</div></div>
+    <div class="stat"><div class="num" data-count="50" data-suffix="+">0</div><div class="lbl">Workshops organized</div></div>
+  </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="journey">
+  <div class="reveal">
+    <div class="sec-tag">My Journey</div>
+    <h2 class="sec-title">From code to company 🚀</h2>
+  </div>
+  <div class="timeline">
+
+    <div class="titem reveal"><div class="dot">🐾</div>
+      <div class="tcard">
+        <div class="when">Coming Soon <span class="badge soon">In the works</span></div>
+        <h3>My Own Venture</h3>
+        <div class="role">Founder · Pet Accessories</div>
+        <div class="details"><ul>
+          <li>Building a brand around pet accessories and everything the pet industry has to offer.</li>
+          <li>Born from a lifelong love for animals of every kind.</li>
+        </ul></div>
+        <div class="more">click to expand ▾</div>
+      </div>
+    </div>
+
+    <div class="titem reveal"><div class="dot">🏭</div>
+      <div class="tcard">
+        <div class="when">Jun 2025 – Present <span class="badge now">Current</span></div>
+        <h3>Swastik Polymers</h3>
+        <div class="role">Partner · Family Business</div>
+        <div class="details"><ul>
+          <li>Joined to learn how businesses really work, hands-on.</li>
+          <li>Manage day-to-day operations — workforce scheduling, performance tracking, financial record-keeping.</li>
+          <li>Developed sales strategies to drive revenue and streamlined workflows for better efficiency.</li>
+        </ul></div>
+        <div class="more">click to expand ▾</div>
+      </div>
+    </div>
+
+    <div class="titem reveal"><div class="dot">💻</div>
+      <div class="tcard">
+        <div class="when">Jul 2023 – May 2025</div>
+        <h3>Goldman Sachs</h3>
+        <div class="role">Software Developer</div>
+        <div class="details"><ul>
+          <li>Full-stack developer with the Core Engineering Team, writing production code for the GS software ecosystem.</li>
+          <li>Built an internal communications portal for 7000+ employees with visualizations and export options.</li>
+          <li>Migrated services through a major RHEL upgrade — 30% better performance.</li>
+          <li>Led the Goldman Analyst Impact Fund team of 5 across the globe, partnering with Blue Cross of Hyderabad on rabies eradication for street animals.</li>
+        </ul></div>
+        <div class="more">click to expand ▾</div>
+      </div>
+    </div>
+
+    <div class="titem reveal"><div class="dot">📦</div>
+      <div class="tcard">
+        <div class="when">Jan 2023 – Jun 2023</div>
+        <h3>Amazon</h3>
+        <div class="role">SDE Intern</div>
+        <div class="details"><ul>
+          <li>Backend development with the Physical Stores Team, improving the in-store customer experience.</li>
+          <li>Built CloudWatch alarms + rollback functionality — deployment downtime down 95%.</li>
+          <li>Optimized video playback with bandwidth-based resolution loading — 70% faster load times.</li>
+        </ul></div>
+        <div class="more">click to expand ▾</div>
+      </div>
+    </div>
+
+    <div class="titem reveal"><div class="dot">🎤</div>
+      <div class="tcard">
+        <div class="when">Jul 2022 – Sep 2022</div>
+        <h3>Goldman Sachs</h3>
+        <div class="role">SDE Intern</div>
+        <div class="details"><ul>
+          <li>Full-stack developer with the CWS Team, shipping production-ready code as a Summer Analyst.</li>
+          <li>Developed a Speaker Event Management platform used for events attended by thousands — speaker background verification, availability checks, and rich visualizations.</li>
+        </ul></div>
+        <div class="more">click to expand ▾</div>
+      </div>
+    </div>
+
+    <div class="titem reveal"><div class="dot">🎓</div>
+      <div class="tcard">
+        <div class="when">2019 – 2023</div>
+        <h3>Maharaja Agrasen Institute of Technology</h3>
+        <div class="role">B.Tech, Computer Science & Engineering · GPA 9.2/10</div>
+        <div class="details"><ul>
+          <li>Head Coordinator, Placement Cell — helped drive a 20% jump in placements.</li>
+          <li>Head Coordinator, TechCom — organized 50+ workshops and the main college fest.</li>
+          <li>Won Smart India Hackathon (college level) with a sensor-fitted smart helmet for coal miners.</li>
+          <li>Microsoft Engage mentee — built a Teams clone with video calls and chat.</li>
+          <li>Microsoft Learn Student Ambassador · mentee at Codess.Cafe and Google Developer Student Clubs.</li>
+          <li>Class XII: Vishal Bharti Public School, Delhi — 90.2%.</li>
+        </ul></div>
+        <div class="more">click to expand ▾</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- SKILLS & ACHIEVEMENTS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="sec-tag">Skills & Achievements</div>
+    <h2 class="sec-title">My toolkit 🛠️</h2>
+  </div>
+  <div class="skill-groups">
+    <div class="sgroup reveal">
+      <h3>💡 Fundamentals</h3>
+      <div class="chips"><span class="chip">Data Structures</span><span class="chip">Algorithms</span><span class="chip">OOPS</span><span class="chip">DBMS</span><span class="chip">SQL</span></div>
+    </div>
+    <div class="sgroup reveal">
+      <h3>⌨️ Programming</h3>
+      <div class="chips"><span class="chip">C</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">JavaScript</span></div>
+    </div>
+    <div class="sgroup reveal">
+      <h3>🌐 Web Development</h3>
+      <div class="chips"><span class="chip">React JS</span><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">Bootstrap</span></div>
+    </div>
+    <div class="sgroup reveal">
+      <h3>🧰 Tools & Cloud</h3>
+      <div class="chips"><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">AWS CloudWatch</span><span class="chip">Linux / RHEL</span></div>
+    </div>
+  </div>
+
+  <div class="ach-list">
+    <div class="ach reveal"><span class="a-ico">⭐</span><span><b>4★ HackerRank (SQL)</b>, 3★ CodeChef, 3★ HackerRank (C++) — plus <b>1000+ problems solved</b> across platforms.</span></div>
+    <div class="ach reveal"><span class="a-ico">🏅</span><span>Ranked <b>57 out of 12,000</b> in the final face-off round of Code Kaze '21.</span></div>
+    <div class="ach reveal"><span class="a-ico">🎖️</span><span><b>Microsoft Learn Student Ambassador</b> (Alpha milestone) · Mentee at Codess.Cafe & Google Developer Student Clubs.</span></div>
+    <div class="ach reveal"><span class="a-ico">🌱</span><span><b>Open-source contributor</b> — 10+ algorithms added to NEO ALGO (GSSoC), plus merged features on the Girl Code It live website.</span></div>
+    <div class="ach reveal"><span class="a-ico">🧩</span><span><b>Community Management app</b> — built video calls, chat, and calendar features in React JS with React Bootstrap.</span></div>
+  </div>
+
+  <div class="profiles reveal">
+    <a class="prof" href="https://leetcode.com/Meghag5" target="_blank">LeetCode</a>
+    <a class="prof" href="https://www.codechef.com/users/meghag5" target="_blank">CodeChef</a>
+    <a class="prof" href="https://www.hackerrank.com/meghagupta050121" target="_blank">HackerRank</a>
+    <a class="prof" href="https://auth.geeksforgeeks.org/user/meghagupta05012001" target="_blank">GeeksforGeeks</a>
+  </div>
+</section>
+
+<!-- HIGHLIGHTS -->
+<section id="highlights">
+  <div class="reveal">
+    <div class="sec-tag">Highlights</div>
+    <h2 class="sec-title">Things I'm proud of ✨</h2>
+  </div>
+  <div class="cards">
+    <div class="hcard reveal" style="--c1:#7C5CBF;--c2:#6EB6FF">
+      <div class="ico">🖥️</div><h3>Portal for 7000+ people</h3>
+      <p>Designed and shipped an internal communications portal at Goldman Sachs, complete with visualizations and data export.</p>
+    </div>
+    <div class="hcard reveal" style="--c1:#5ECCB3;--c2:#7C5CBF">
+      <div class="ico">🛡️</div><h3>95% less downtime</h3>
+      <p>CloudWatch alarms + automated rollback at Amazon that caught pipeline failures before they became outages.</p>
+    </div>
+    <div class="hcard reveal" style="--c1:#FF8E7A;--c2:#FFC85C">
+      <div class="ico">⛑️</div><h3>Smart Mining Helmet</h3>
+      <p>Won Smart India Hackathon at college level with a sensor-packed helmet relaying real-time info for underground coal miners.</p>
+    </div>
+    <div class="hcard reveal" style="--c1:#6EB6FF;--c2:#5ECCB3">
+      <div class="ico">🐕</div><h3>Rabies eradication project</h3>
+      <p>Led a global team of 5 through the Goldman Analyst Impact Fund, partnering with Blue Cross of Hyderabad to help street animals.</p>
+    </div>
+    <div class="hcard reveal" style="--c1:#FFC85C;--c2:#FF8E7A">
+      <div class="ico">🤝</div><h3>Placement Cell impact</h3>
+      <p>As Head Coordinator, connected students with hundreds of companies — contributing to a 20% rise in placements.</p>
+    </div>
+    <div class="hcard reveal" style="--c1:#A47CF0;--c2:#7C5CBF">
+      <div class="ico">⚡</div><h3>70% faster playback</h3>
+      <p>Introduced bandwidth-based resolution loading at Amazon, cutting video load times by 70%.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S NEXT -->
+<section id="next">
+  <div class="pet-banner reveal">
+    <div class="paws"><span>🐾</span><span>🐾</span><span>🐾</span><span>🐾</span></div>
+    <h2>Something exciting is coming…</h2>
+    <p>
+      I'm building my own company in the pet space — starting with pet accessories and growing into
+      everything the pet industry can be. As a lifelong animal lover, this one's straight from the heart.
+    </p>
+    <div class="soon-pill">Coming Soon</div>
+  </div>
+</section>
+
+<!-- BEYOND WORK -->
+<section id="beyond">
+  <div class="reveal">
+    <div class="sec-tag">Beyond Work</div>
+    <h2 class="sec-title">When I'm not building things 💜</h2>
+  </div>
+  <div class="hobbies">
+    <div class="hob reveal"><span class="emo">🏊‍♀️</span><h3>Swimming</h3><p>My favorite way to switch off and recharge.</p></div>
+    <div class="hob reveal"><span class="emo">💃</span><h3>Dancing</h3><p>If there's music, I'm moving.</p></div>
+    <div class="hob reveal"><span class="emo">🎤</span><h3>Singing</h3><p>Always mid-song, somewhere.</p></div>
+    <div class="hob reveal"><span class="emo">✈️</span><h3>Traveling</h3><p>Mission: the whole world, one trip at a time.</p></div>
+    <div class="hob reveal"><span class="emo">🐶</span><h3>Animal Lover</h3><p>All kinds, all sizes — every single one.</p></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-wrap reveal">
+    <div class="sec-tag">Get in Touch</div>
+    <h2 class="sec-title">Let's connect!</h2>
+    <p style="color:var(--muted);max-width:480px;margin:0 auto">
+      Whether it's tech, business, pets, or travel stories — I'd love to hear from you.
+    </p>
+    <div class="contact-links">
+      <a class="clink" href="mailto:meghagupta.0105@gmail.com">📧 meghagupta.0105@gmail.com</a>
+      <a class="clink" href="https://linkedin.com/in/meghagupta0501" target="_blank">💼 LinkedIn</a>
+      <a class="clink" href="https://github.com/meghag5" target="_blank">🐙 GitHub</a>
+    </div>
+  </div>
+</section>
+
+<footer>Made with <span class="heart">♥</span> by Megha Gupta · <span id="year"></span> · psst — try clicking anywhere 🐾</footer>
+
+<script>
+  // typing effect
+  const words=["Software Engineer","Entrepreneur","Pet Lover 🐾","Traveler ✈️","Dancer 💃","Singer 🎤","Swimmer 🏊‍♀️"];
+  const typedEl=document.getElementById('typed');
+  let wi=0,ci=0,deleting=false;
+  (function type(){
+    const w=words[wi];
+    typedEl.textContent=w.slice(0,ci);
+    if(!deleting){
+      if(ci++<w.length){setTimeout(type,70)}
+      else{deleting=true;setTimeout(type,1500)}
+    }else{
+      if(ci-->0){setTimeout(type,38)}
+      else{deleting=false;wi=(wi+1)%words.length;setTimeout(type,300)}
+    }
+  })();
+
+  // reveal on scroll
+  const io=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('show');io.unobserve(e.target)}
+  }),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // counters
+  const cio=new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting)return;
+    const el=e.target,target=parseFloat(el.dataset.count),suf=el.dataset.suffix||'';
+    const dec=String(el.dataset.count).includes('.')?1:0;
+    let t0=null;
+    function tick(ts){
+      if(!t0)t0=ts;
+      const p=Math.min((ts-t0)/1400,1);
+      el.textContent=(target*(1-Math.pow(1-p,3))).toFixed(dec)+suf;
+      if(p<1)requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+    cio.unobserve(el);
+  }),{threshold:.6});
+  document.querySelectorAll('.num').forEach(el=>cio.observe(el));
+
+  // expandable timeline cards
+  document.querySelectorAll('.tcard').forEach(c=>c.addEventListener('click',()=>{
+    c.classList.toggle('open');
+    c.querySelector('.more').textContent=c.classList.contains('open')?'click to collapse ▴':'click to expand ▾';
+  }));
+
+  // active nav link
+  const secs=document.querySelectorAll('section[id]');
+  const nio=new IntersectionObserver(es=>es.forEach(e=>{
+    if(e.isIntersecting){
+      document.querySelectorAll('nav a').forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+e.target.id));
+    }
+  }),{rootMargin:'-40% 0px -55% 0px'});
+  secs.forEach(s=>nio.observe(s));
+
+  // paw print click effect
+  document.addEventListener('click',ev=>{
+    if(ev.target.closest('a,button'))return;
+    const p=document.createElement('span');
+    p.className='paw-fx';p.textContent='🐾';
+    p.style.left=(ev.clientX-10)+'px';p.style.top=(ev.clientY-10)+'px';
+    document.body.appendChild(p);
+    setTimeout(()=>p.remove(),1000);
+  });
+
+  document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
